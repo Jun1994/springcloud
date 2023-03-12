@@ -1,0 +1,49 @@
+package com.atguigu.controller;
+
+import com.atguigu.entity.Payment;
+import com.atguigu.service.PaymentService;
+import com.atguigu.utils.CommonResult;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+
+@RestController
+@Slf4j
+public class PaymentController {
+
+    @Resource
+    private PaymentService paymentService;
+
+    @PostMapping("/selectById/{id}")
+    public CommonResult<Payment> selectById(@PathVariable Long id){
+        CommonResult<Payment> commonResult = null;
+        Payment payment = paymentService.selectById(id);
+        if (payment != null) {
+            commonResult = new CommonResult<>(200,"查询成功",payment);
+            log.info("*****查询结果："+payment);
+        }else if(payment == null){
+            commonResult = new CommonResult<>(200,"查询成功",null);
+        }else{
+            commonResult = new CommonResult<>(404,"查询失败");
+        }
+        return commonResult;
+    }
+
+    @PostMapping("/create")
+    public CommonResult<Integer> create(Payment payment){
+        CommonResult<Integer> commonResult = null;
+        int num = paymentService.create(payment);
+        if (num > 0) {
+            commonResult = new CommonResult<>(200,"添加成功",num);
+            log.info("*****插入结果："+num);
+        }else{
+            commonResult = new CommonResult<>(404,"添加失败");
+        }
+        return commonResult;
+    }
+
+}
+
