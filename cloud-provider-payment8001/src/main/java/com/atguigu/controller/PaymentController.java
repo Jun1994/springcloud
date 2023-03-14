@@ -4,9 +4,7 @@ import com.atguigu.entity.Payment;
 import com.atguigu.service.PaymentService;
 import com.atguigu.utils.CommonResult;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -17,7 +15,7 @@ public class PaymentController {
     @Resource
     private PaymentService paymentService;
 
-    @PostMapping("/selectById/{id}")
+    @GetMapping("/selectById/{id}")
     public CommonResult<Payment> selectById(@PathVariable Long id){
         CommonResult<Payment> commonResult = null;
         Payment payment = paymentService.selectById(id);
@@ -33,7 +31,7 @@ public class PaymentController {
     }
 
     @PostMapping("/create")
-    public CommonResult<Integer> create(Payment payment){
+    public CommonResult<Integer> create(@RequestBody Payment payment){
         CommonResult<Integer> commonResult = null;
         int num = paymentService.create(payment);
         if (num > 0) {

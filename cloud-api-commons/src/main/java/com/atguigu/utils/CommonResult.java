@@ -1,6 +1,5 @@
 package com.atguigu.utils;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +7,7 @@ import lombok.NoArgsConstructor;
 /**
  * @ClassName CommonResult
  * @Author maxingjun@xci96716.com
- * @Since 2023/3/10 16:36
+ * @Since 2023/3/14 10:13
  * @Description
  * @Version 1.0
  */
