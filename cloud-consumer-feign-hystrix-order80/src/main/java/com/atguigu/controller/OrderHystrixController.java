@@ -1,6 +1,7 @@
 package com.atguigu.controller;
 
 import com.atguigu.service.PaymentHystrixService;
+import com.netflix.hystrix.contrib.javanica.annotation.DefaultProperties;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixCommand;
 import com.netflix.hystrix.contrib.javanica.annotation.HystrixProperty;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -19,13 +20,16 @@ import javax.annotation.Resource;
  */
 @RestController
 @RequestMapping("consumer")
+@DefaultProperties(defaultFallback = "payment_Global_FallbackMethod")
 public class OrderHystrixController {
 
     @Resource
     private PaymentHystrixService paymentHystrixService;
 
     @GetMapping("/payment/hystrix/ok/{id}")
+    @HystrixCommand
     public String paymentInfo_OK(@PathVariable("id") Integer id){
+        int age = 10/0;
       return paymentHystrixService.paymentInfo_OK(id);
     }
 
@@ -42,4 +46,12 @@ public class OrderHystrixController {
         return "我是消费者60,对方支付系统繁忙请10秒种后再试或者自己运行出错请检查自己,o(╥﹏╥)o";
     }
 
+    /**
+     * 全局fallback
+     *
+     * @return
+     */
+    public String payment_Global_FallbackMethod() {
+        return "Global异常处理信息,请稍后重试.o(╥﹏╥)o";
+    }
 }
