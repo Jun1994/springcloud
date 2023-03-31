@@ -1,0 +1,35 @@
+package com.atguigu.controller;
+
+import com.atguigu.service.PaymentHystrixService;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
+import javax.annotation.Resource;
+
+/**
+ * @ClassName OrderHyrixController
+ * @Author maxingjun@xci96716.com
+ * @Since 2023/3/31 22:13
+ * @Description
+ * @Version 1.0
+ */
+@RestController
+@RequestMapping("consumer")
+public class OrderHystrixController {
+
+    @Resource
+    private PaymentHystrixService paymentHystrixService;
+
+    @GetMapping("/payment/hystrix/ok/{id}")
+    public String paymentInfo_OK(@PathVariable("id") Integer id){
+      return paymentHystrixService.paymentInfo_OK(id);
+    }
+
+    @GetMapping("/payment/hystrix/timeout/{id}")
+    public String paymentInfo_TimeOut(@PathVariable("id") Integer id){
+        return paymentHystrixService.paymentInfo_TimeOut(id);
+    }
+
+}
