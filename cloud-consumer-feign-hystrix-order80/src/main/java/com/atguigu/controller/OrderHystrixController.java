@@ -29,7 +29,7 @@ public class OrderHystrixController {
     @GetMapping("/payment/hystrix/ok/{id}")
     @HystrixCommand
     public String paymentInfo_OK(@PathVariable("id") Integer id){
-        int age = 10/0;
+//        int age = 10/0;
       return paymentHystrixService.paymentInfo_OK(id);
     }
 
