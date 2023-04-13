@@ -15,6 +15,7 @@ spring:
             - springcloud-config
           username: 844300634@qq.com
           password: mkws120860
+          timeout: 30
       ####读取分支
       label: main
 
